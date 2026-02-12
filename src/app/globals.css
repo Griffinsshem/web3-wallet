@@ -2,9 +2,7 @@
 
 :root {
   --background: #eee7de;
-  /* dark cream grey */
-  --foreground: #5e5c5a;
-  /* soft cream white */
+  --foreground: #181717;
 }
 
 @theme inline {
