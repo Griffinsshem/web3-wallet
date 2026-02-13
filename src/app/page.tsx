@@ -3,24 +3,29 @@ import { ConnectWallet } from "@/components/connect-wallet";
 export default function Home() {
   return (
     <main className="flex min-h-screen items-center justify-center px-4">
-      <div className="w-full max-w-md rounded-2xl bg-[#4a433b] p-8 shadow-xl">
-        <h1 className="mb-6 text-center text-2xl font-semibold">
+      <div className="w-full max-w-md rounded-2xl bg-[#4a433b] p-10 shadow-2xl">
+        <h1 className="text-center text-3xl font-semibold tracking-tight text-white">
           Web3 Wallet Dashboard
         </h1>
 
-        <div className="flex justify-center">
+        <p className="mt-2 text-center text-sm text-gray-300">
+          Connect your wallet to view balances
+        </p>
+
+        <div className="mt-8 flex justify-center">
           <ConnectWallet />
         </div>
 
-        {/* Future balance section */}
-        <div className="mt-8 space-y-3 text-sm opacity-70">
-          <div className="flex justify-between">
-            <span>ETH Balance</span>
-            <span>—</span>
+        {/* Balance Section */}
+        <div className="mt-10 space-y-4 border-t border-gray-600 pt-6">
+          <div className="flex items-center justify-between text-gray-300">
+            <span className="text-sm">ETH Balance</span>
+            <span className="font-medium text-white">—</span>
           </div>
-          <div className="flex justify-between">
-            <span>USDT Balance</span>
-            <span>—</span>
+
+          <div className="flex items-center justify-between text-gray-300">
+            <span className="text-sm">USDT Balance</span>
+            <span className="font-medium text-white">—</span>
           </div>
         </div>
       </div>
