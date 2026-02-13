@@ -14,7 +14,7 @@ export function useEthBalance() {
   });
 
   const formattedBalance =
-    data?.value && !isLoading
+    data && !isLoading
       ? parseFloat(formatEther(data.value)).toFixed(4)
       : null;
 
