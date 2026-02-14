@@ -12,7 +12,7 @@ const config = createConfig({
   chains: [mainnet],
   connectors: [injected()],
   transports: {
-    [mainnet.id]: http("https://rpc.ankr.com/eth"), // CORS-safe RPC
+    [mainnet.id]: http(),
   },
 });
 
