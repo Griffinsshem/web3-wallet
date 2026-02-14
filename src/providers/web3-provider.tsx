@@ -6,9 +6,7 @@ import { mainnet } from "wagmi/chains";
 import { injected } from "wagmi/connectors";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-
 const queryClient = new QueryClient();
-
 
 const config = createConfig({
   chains: [mainnet],
@@ -18,7 +16,7 @@ const config = createConfig({
     }),
   ],
   transports: {
-    [mainnet.id]: http(),
+    [mainnet.id]: http("https://eth.llamarpc.com"),
   },
 });
 
