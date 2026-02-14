@@ -3,14 +3,16 @@
 import { ReactNode } from "react";
 import { WagmiProvider, createConfig, http } from "wagmi";
 import { mainnet } from "wagmi/chains";
-import { metaMask } from "wagmi/connectors";
+import { injected } from "wagmi/connectors";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 
 const config = createConfig({
   chains: [mainnet],
-  connectors: [metaMask()],
+  connectors: [
+    injected(), // ← use injected instead of metaMask()
+  ],
   transports: {
     [mainnet.id]: http(), // no custom RPC URL
   },
