@@ -24,7 +24,6 @@ export function useUsdtBalance() {
     abi: erc20Abi,
     functionName: "balanceOf",
     args: address ? [address] : undefined,
-    chainId: 1,
     query: {
       enabled: !!address && isConnected,
       refetchOnWindowFocus: true,
@@ -32,12 +31,10 @@ export function useUsdtBalance() {
     },
   });
 
-  // Subscribe to block updates
   const { data: blockNumber } = useBlockNumber({
     watch: true,
   });
 
-  // Refetch when new block is mined
   useEffect(() => {
     if (blockNumber) {
       refetch();
