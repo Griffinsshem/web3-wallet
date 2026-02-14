@@ -10,11 +10,9 @@ const queryClient = new QueryClient();
 
 const config = createConfig({
   chains: [mainnet],
-  connectors: [
-    injected(), // ← use injected instead of metaMask()
-  ],
+  connectors: [injected()],
   transports: {
-    [mainnet.id]: http(), // no custom RPC URL
+    [mainnet.id]: http("https://rpc.ankr.com/eth"), // CORS-safe RPC
   },
 });
 
