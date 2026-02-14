@@ -1,6 +1,7 @@
 "use client";
 
-import { useAccount, useReadContract } from "wagmi";
+import { useAccount, useReadContract, useBlockNumber } from "wagmi";
+import { useEffect } from "react";
 import { formatUnits } from "viem";
 
 const USDT_CONTRACT = "0xdAC17F958D2ee523a2206206994597C13D831ec7";
@@ -18,21 +19,30 @@ const erc20Abi = [
 export function useUsdtBalance() {
   const { address, isConnected } = useAccount();
 
-  const { data, isLoading, isError } = useReadContract({
+  const { data, isLoading, isError, refetch } = useReadContract({
     address: USDT_CONTRACT,
     abi: erc20Abi,
     functionName: "balanceOf",
     args: address ? [address] : undefined,
     chainId: 1,
-
-    watch: true,
-
     query: {
       enabled: !!address && isConnected,
       refetchOnWindowFocus: true,
       refetchOnReconnect: true,
     },
   });
+
+  // Subscribe to block updates
+  const { data: blockNumber } = useBlockNumber({
+    watch: true,
+  });
+
+  // Refetch when new block is mined
+  useEffect(() => {
+    if (blockNumber) {
+      refetch();
+    }
+  }, [blockNumber, refetch]);
 
   const formattedBalance =
     data && isConnected
