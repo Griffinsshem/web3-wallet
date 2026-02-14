@@ -4,14 +4,19 @@ import { useEffect, useState } from "react";
 import { ConnectWallet } from "@/components/connect-wallet";
 import { useEthBalance } from "@/hooks/useEthBalance";
 import { useUsdtBalance } from "@/hooks/useUsdtBalance";
+import { useChainId } from "wagmi";
 
 export default function Home() {
-  // 🔹 Prevent hydration mismatch
+  // Prevent hydration mismatch
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Active chain detection (Step 2.1)
+  const chainId = useChainId();
+  const isMainnet = chainId === 1;
 
   const { balance, isLoading, isError, isConnected } = useEthBalance();
 
@@ -21,9 +26,11 @@ export default function Home() {
     isError: usdtError,
   } = useUsdtBalance();
 
+  console.log("Active chain:", chainId);
+  console.log("Is Mainnet:", isMainnet);
   console.log("USDT:", usdtBalance, usdtLoading, usdtError);
 
-  // 🔹 During SSR + first client render
+  // During SSR + first client render
   if (!mounted) {
     return (
       <main className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-[#e8e4dc] via-[#e2ddd4] to-[#dcd6cc]">
