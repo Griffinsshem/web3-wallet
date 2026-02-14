@@ -1,13 +1,12 @@
 "use client";
 
-import { useAccount, useBalance, useBlockNumber } from "wagmi";
-import { useEffect } from "react";
+import { useAccount, useBalance } from "wagmi";
 import { formatEther } from "viem";
 
 export function useEthBalance() {
   const { address, isConnected } = useAccount();
 
-  const { data, isLoading, isError, refetch } = useBalance({
+  const { data, isLoading, isError } = useBalance({
     address,
     query: {
       enabled: !!address && isConnected,
@@ -15,16 +14,6 @@ export function useEthBalance() {
       refetchOnReconnect: true,
     },
   });
-
-  const { data: blockNumber } = useBlockNumber({
-    watch: true,
-  });
-
-  useEffect(() => {
-    if (blockNumber) {
-      refetch();
-    }
-  }, [blockNumber, refetch]);
 
   const formattedBalance =
     data && !isLoading
