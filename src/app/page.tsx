@@ -14,7 +14,7 @@ export default function Home() {
     setMounted(true);
   }, []);
 
-  // Active chain detection (Step 2.1)
+  //  Active chain detection
   const chainId = useChainId();
   const isMainnet = chainId === 1;
 
@@ -25,10 +25,6 @@ export default function Home() {
     isLoading: usdtLoading,
     isError: usdtError,
   } = useUsdtBalance();
-
-  console.log("Active chain:", chainId);
-  console.log("Is Mainnet:", isMainnet);
-  console.log("USDT:", usdtBalance, usdtLoading, usdtError);
 
   // During SSR + first client render
   if (!mounted) {
@@ -56,37 +52,52 @@ export default function Home() {
 
         {/* Balance Section */}
         <div className="mt-10 space-y-5 border-t border-[#d6d1c7] pt-6">
-          {/* ETH */}
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-[#6b6b6b]">ETH Balance</span>
+          {/*  Wrong Network Warning */}
+          {isConnected && !isMainnet && (
+            <div className="rounded-xl bg-yellow-100 border border-yellow-300 p-4 text-sm text-yellow-800">
+              ⚠ Please switch to Ethereum Mainnet to view balances.
+            </div>
+          )}
 
-            <span className="text-base font-semibold text-[#1f1f1f]">
-              {!isConnected
-                ? "—"
-                : isLoading
-                  ? "Loading..."
-                  : isError
-                    ? "Error"
-                    : `${balance} ETH`}
-            </span>
-          </div>
+          {/*  Mainnet Balances */}
+          {isConnected && isMainnet && (
+            <>
+              {/* ETH */}
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-[#6b6b6b]">ETH Balance</span>
 
-          {/* USDT */}
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-[#6b6b6b]">USDT Balance</span>
+                <span className="text-base font-semibold text-[#1f1f1f]">
+                  {isLoading
+                    ? "Loading..."
+                    : isError
+                      ? "Error"
+                      : `${balance} ETH`}
+                </span>
+              </div>
 
-            <span className="text-base font-semibold text-[#1f1f1f]">
-              {!isConnected
-                ? "—"
-                : usdtLoading
-                  ? "Loading..."
-                  : usdtError
-                    ? "Error"
-                    : usdtBalance !== null
-                      ? `${usdtBalance} USDT`
-                      : "0 USDT"}
-            </span>
-          </div>
+              {/* USDT */}
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-[#6b6b6b]">USDT Balance</span>
+
+                <span className="text-base font-semibold text-[#1f1f1f]">
+                  {usdtLoading
+                    ? "Loading..."
+                    : usdtError
+                      ? "Error"
+                      : usdtBalance !== null
+                        ? `${usdtBalance} USDT`
+                        : "0 USDT"}
+                </span>
+              </div>
+            </>
+          )}
+
+          {/* Not Connected State */}
+          {!isConnected && (
+            <div className="text-center text-sm text-[#6b6b6b]">
+              Connect wallet to view balances
+            </div>
+          )}
         </div>
       </div>
     </main>
