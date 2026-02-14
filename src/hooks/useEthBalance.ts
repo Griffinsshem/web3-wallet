@@ -9,7 +9,6 @@ export function useEthBalance() {
 
   const { data, isLoading, isError, refetch } = useBalance({
     address,
-    chainId: 1,
     query: {
       enabled: !!address && isConnected,
       refetchOnWindowFocus: true,
@@ -17,12 +16,10 @@ export function useEthBalance() {
     },
   });
 
-  // Subscribe to new blocks
   const { data: blockNumber } = useBlockNumber({
     watch: true,
   });
 
-  // Refetch on new block
   useEffect(() => {
     if (blockNumber) {
       refetch();
