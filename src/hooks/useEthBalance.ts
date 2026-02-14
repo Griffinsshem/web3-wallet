@@ -8,8 +8,14 @@ export function useEthBalance() {
 
   const { data, isLoading, isError } = useBalance({
     address,
+    chainId: 1,
+
+    watch: true,
+
     query: {
       enabled: !!address && isConnected,
+      refetchOnWindowFocus: true,
+      refetchOnReconnect: true,
     },
   });
 
