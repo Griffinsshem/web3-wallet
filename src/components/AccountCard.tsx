@@ -28,9 +28,9 @@ export default function AccountCard() {
           </p>
         </>
       ) : (
-        <p className="text-red-500">
+        <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600">
           Wallet not connected
-        </p>
+        </div>
       )}
     </div>
   );
