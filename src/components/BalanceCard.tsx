@@ -26,9 +26,10 @@ export default function BalanceCard() {
           Connect wallet to view balance
         </p>
       ) : isLoading ? (
-        <p className="text-gray-500">
-          Loading balance...
-        </p>
+        <div className="space-y-2 animate-pulse">
+          <div className="h-4 bg-gray-300 rounded w-1/3"></div>
+          <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+        </div>
       ) : isError ? (
         <p className="text-red-600">
           Error fetching balance
