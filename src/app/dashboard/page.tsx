@@ -7,13 +7,14 @@ function shortenAddress(address: string) {
 }
 
 export default function DashboardPage() {
-  const { address, isConnected, status } = useAccount();
+  const { address, isConnected, status, chain } = useAccount();
 
   return (
     <main className="min-h-screen p-10 bg-gray-50">
       <div className="max-w-4xl mx-auto space-y-6">
         <h1 className="text-3xl font-bold">Web3 Dashboard</h1>
 
+        {/* Account Card */}
         <div className="p-6 bg-white rounded-xl shadow space-y-2">
           <h2 className="text-xl font-semibold">Account</h2>
 
@@ -36,6 +37,30 @@ export default function DashboardPage() {
               Wallet not connected
             </p>
           )}
+        </div>
+
+        {/* Network Card */}
+        <div className="p-6 bg-white rounded-xl shadow space-y-2">
+          <h2 className="text-xl font-semibold">Network</h2>
+
+          {isConnected && chain ? (
+            <>
+              <p>
+                <strong>Network Name:</strong> {chain.name}
+              </p>
+              <p>
+                <strong>Chain ID:</strong> {chain.id}
+              </p>
+              <p className="text-green-600">
+                Supported Network
+              </p>
+            </>
+          ) : (
+            <p className="text-gray-500">
+              Connect wallet to view network
+            </p>
+          )}
+
         </div>
       </div>
     </main>
