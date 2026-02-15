@@ -5,6 +5,7 @@ import { ConnectWallet } from "@/components/connect-wallet";
 import { useEthBalance } from "@/hooks/useEthBalance";
 import { useUsdtBalance } from "@/hooks/useUsdtBalance";
 import { useChainId } from "wagmi";
+import Link from "next/link";
 
 export default function Home() {
   // Prevent hydration mismatch
@@ -49,6 +50,16 @@ export default function Home() {
         <div className="mt-8 flex justify-center">
           <ConnectWallet />
         </div>
+
+        <div className="mt-6 text-center">
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center text-sm font-medium text-[#1f1f1f] hover:opacity-70 transition"
+          >
+            Go to Dashboard →
+          </Link>
+        </div>
+
 
         {/* Balance Section */}
         <div className="mt-10 space-y-5 border-t border-[#d6d1c7] pt-6">
