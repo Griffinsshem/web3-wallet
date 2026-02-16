@@ -8,7 +8,7 @@ import BalanceCard from "@/components/BalanceCard";
 export default function DashboardPage() {
   return (
     <main className="relative min-h-screen bg-gradient-to-br from-[#e8e4dc] via-[#e2ddd4] to-[#dcd6cc] px-6 py-16">
-      <div className="mx-auto w-full max-w-5xl rounded-3xl bg-white/60 p-12 shadow-[0_20px_60px_rgba(0,0,0,0.15)] backdrop-blur-xl border border-white/40">
+      <div className="mx-auto w-full max-w-5xl rounded-3xl bg-white/60 p-12 shadow-[0_20px_60px_rgba(0,0,0,0.15)] backdrop-blur-xl border border-white/40 animate-fadeUp">
 
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -35,15 +35,15 @@ export default function DashboardPage() {
         {/* Content Grid */}
         <div className="grid gap-8 md:grid-cols-2">
 
-          <div className="rounded-2xl bg-white/50 p-8 border border-white/50 shadow-sm">
+          <div className="rounded-2xl bg-white/50 p-8 border border-white/50 shadow-sm animate-fadeUp [animation-delay:0.1s]">
             <AccountCard />
           </div>
 
-          <div className="rounded-2xl bg-white/50 p-8 border border-white/50 shadow-sm">
+          <div className="rounded-2xl bg-white/50 p-8 border border-white/50 shadow-sm animate-fadeUp [animation-delay:0.2s]">
             <NetworkCard />
           </div>
 
-          <div className="md:col-span-2 rounded-2xl bg-white/50 p-8 border border-white/50 shadow-sm">
+          <div className="md:col-span-2 rounded-2xl bg-white/50 p-8 border border-white/50 shadow-sm animate-fadeUp [animation-delay:0.3s]">
             <BalanceCard />
           </div>
 
