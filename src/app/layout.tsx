@@ -17,16 +17,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${jost.variable} font-sans antialiased`}>
         <ThemeProvider>
-          <Web3Provider>
-            {children}
-          </Web3Provider>
+          <Web3Provider>{children}</Web3Provider>
         </ThemeProvider>
       </body>
     </html>
