@@ -7,12 +7,13 @@ import BalanceCard from "@/components/BalanceCard";
 
 export default function DashboardPage() {
   return (
-    <main className="relative min-h-screen bg-gradient-to-br from-[#e8e4dc] via-[#e2ddd4] to-[#dcd6cc] px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+    <main className="relative min-h-screen bg-gradient-to-br from-[#e8e4dc] via-[#e2ddd4] to-[#dcd6cc] px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-20">
 
-      <div className="mx-auto w-full max-w-6xl rounded-3xl bg-white/60 p-6 sm:p-10 lg:p-14 shadow-[0_20px_60px_rgba(0,0,0,0.15)] backdrop-blur-xl border border-white/40 animate-fadeUp">
+      <div className="mx-auto w-full max-w-6xl rounded-3xl bg-white/60 p-6 sm:p-10 lg:p-14 shadow-[0_20px_60px_rgba(0,0,0,0.15)] backdrop-blur-xl border border-white/40 animate-fadeUp transition-all duration-300">
 
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+
           <div>
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-[#1f1f1f]">
               Dashboard
@@ -28,27 +29,32 @@ export default function DashboardPage() {
           >
             ← Back Home
           </Link>
+
         </div>
 
         {/* Divider */}
         <div className="my-8 sm:my-10 border-t border-[#d6d1c7]" />
 
         {/* Content Grid */}
-        <div className="grid gap-6 sm:gap-8 md:grid-cols-2">
+        <div className="grid gap-6 sm:gap-8 lg:gap-10 md:grid-cols-2">
 
-          <div className="group rounded-2xl bg-white/50 p-5 sm:p-8 border border-white/50 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.12)] animate-fadeUp [animation-delay:0.1s]">
+          {/* Account */}
+          <div className="rounded-2xl bg-white/50 p-5 sm:p-8 border border-white/50 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
             <AccountCard />
           </div>
 
-          <div className="group rounded-2xl bg-white/50 p-5 sm:p-8 border border-white/50 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.12)] animate-fadeUp [animation-delay:0.2s]">
+          {/* Network */}
+          <div className="rounded-2xl bg-white/50 p-5 sm:p-8 border border-white/50 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
             <NetworkCard />
           </div>
 
-          <div className="group md:col-span-2 rounded-2xl bg-white/50 p-5 sm:p-8 border border-white/50 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.12)] animate-fadeUp [animation-delay:0.3s]">
+          {/* Balance */}
+          <div className="md:col-span-2 rounded-2xl bg-white/50 p-5 sm:p-8 border border-white/50 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
             <BalanceCard />
           </div>
 
         </div>
+
       </div>
     </main>
   );
