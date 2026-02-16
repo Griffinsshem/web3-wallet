@@ -36,6 +36,10 @@ export function ThemeProvider({
 
     document.documentElement.classList.remove("light", "dark");
     document.documentElement.classList.add(theme);
+
+    console.log("Theme switched to:", theme);
+    console.log("HTML class list:", document.documentElement.className);
+
     localStorage.setItem("theme", theme);
   }, [theme, mounted]);
 

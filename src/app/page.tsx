@@ -58,6 +58,10 @@ export default function Home() {
           <h1 className="text-3xl font-semibold tracking-tight text-[#1f1f1f] dark:text-white transition-colors duration-500">
             Web3 Wallet Dashboard
           </h1>
+          <div className="bg-white dark:bg-black text-black dark:text-white p-10 mt-10">
+            THEME TEST BLOCK
+          </div>
+
 
           <p className="mt-2 text-sm text-[#5c5c5c] dark:text-gray-400 transition-colors duration-500">
             Connect your wallet to securely view balances
