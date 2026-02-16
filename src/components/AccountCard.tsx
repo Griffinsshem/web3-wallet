@@ -2,6 +2,14 @@
 
 import { useAccount, useConnect } from "wagmi";
 import { useState } from "react";
+import {
+  User,
+  Copy,
+  Check,
+  Wallet,
+  Loader2,
+  Plug,
+} from "lucide-react";
 
 function shortenAddress(address: string) {
   return `${address.slice(0, 6)}...${address.slice(-4)}`;
@@ -21,11 +29,15 @@ export default function AccountCard() {
 
   return (
     <div className="p-6 bg-white rounded-xl shadow space-y-6">
+
       {/* Header */}
       <div className="flex items-center justify-between flex-wrap gap-3">
-        <h2 className="text-xl font-semibold text-[#1f1f1f]">
-          Account
-        </h2>
+        <div className="flex items-center gap-2">
+          <User className="h-5 w-5 text-[#6b6b6b]" />
+          <h2 className="text-xl font-semibold text-[#1f1f1f]">
+            Account
+          </h2>
+        </div>
 
         {/* Status Badge */}
         <div
@@ -46,17 +58,30 @@ export default function AccountCard() {
 
       {isConnected && address ? (
         <div className="space-y-4">
-          {/* Address Display Card */}
+
+          {/* Address Card */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 rounded-xl bg-[#f5f3ef] border border-[#e6e1d8] px-4 py-3">
-            <span className="text-sm font-medium text-[#1f1f1f] break-all">
+
+            <div className="flex items-center gap-2 text-sm font-medium text-[#1f1f1f] break-all">
+              <Wallet className="h-4 w-4 text-[#6b6b6b]" />
               {shortenAddress(address)}
-            </span>
+            </div>
 
             <button
               onClick={handleCopy}
-              className="text-xs font-medium text-[#1f1f1f] hover:opacity-60 transition"
+              className="flex items-center gap-1 text-xs font-medium text-[#1f1f1f] hover:opacity-60 transition"
             >
-              {copied ? "Copied ✓" : "Copy"}
+              {copied ? (
+                <>
+                  <Check className="h-4 w-4 text-green-600" />
+                  Copied
+                </>
+              ) : (
+                <>
+                  <Copy className="h-4 w-4" />
+                  Copy
+                </>
+              )}
             </button>
           </div>
 
@@ -67,7 +92,9 @@ export default function AccountCard() {
         </div>
       ) : (
         <div className="space-y-4">
-          <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-sm text-red-600">
+
+          <div className="flex items-center gap-2 p-4 bg-red-50 border border-red-200 rounded-lg text-sm text-red-600">
+            <Plug className="h-4 w-4" />
             Wallet not connected
           </div>
 
@@ -78,13 +105,17 @@ export default function AccountCard() {
               disabled={isPending}
               className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#1f1f1f] text-white text-sm font-medium hover:opacity-90 transition disabled:opacity-50"
             >
-              {isPending && (
-                <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              {isPending ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Connecting...
+                </>
+              ) : (
+                <>
+                  <Wallet className="h-4 w-4" />
+                  Connect with {connector.name}
+                </>
               )}
-
-              {isPending
-                ? "Connecting..."
-                : `Connect with ${connector.name}`}
             </button>
           ))}
         </div>
