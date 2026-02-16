@@ -42,14 +42,14 @@ export default function AccountCard() {
         {/* Status Badge */}
         <div
           className={`flex items-center gap-2 text-xs font-medium px-3 py-1 rounded-full ${isConnected
-              ? "bg-green-100 text-green-700"
-              : "bg-red-100 text-red-600"
+            ? "bg-green-100 text-green-700"
+            : "bg-red-100 text-red-600"
             }`}
         >
           <span
             className={`h-2 w-2 rounded-full ${isConnected
-                ? "bg-green-500 animate-pulse"
-                : "bg-red-500"
+              ? "bg-green-500 animate-pulse"
+              : "bg-red-500"
               }`}
           />
           {isConnected ? "Connected" : "Disconnected"}
@@ -86,7 +86,7 @@ export default function AccountCard() {
           </div>
 
           {/* Full Address */}
-          <div className="text-xs text-[#7a7a7a] break-all">
+          <div className="text-xs text-[#1f1f1f] break-all">
             {address}
           </div>
         </div>
