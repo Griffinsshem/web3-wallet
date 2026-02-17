@@ -5,6 +5,7 @@ import { ConnectWallet } from "@/components/connect-wallet";
 import { useEthBalance } from "@/hooks/useEthBalance";
 import { useUsdtBalance } from "@/hooks/useUsdtBalance";
 import { useChainId } from "wagmi";
+import { ThemeToggle } from "@/components/theme-toggle";
 import Link from "next/link";
 import {
   Wallet,
@@ -151,6 +152,7 @@ export default function Home() {
           )}
         </div>
       </div>
+      <ThemeToggle />
     </main>
   );
 }
