@@ -3,18 +3,20 @@
 import { useEffect, useState } from "react";
 import { ConnectWallet } from "@/components/connect-wallet";
 import DashboardSection from "@/components/DashboardSection";
-import { useAccount } from "wagmi";
+import { useAccount, useDisconnect } from "wagmi";
 import { ThemeToggle } from "@/components/theme-toggle";
 import {
   Wallet,
   ShieldCheck,
   Sparkles,
   Loader2,
+  LogOut,
 } from "lucide-react";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const { isConnected, address } = useAccount();
+  const { disconnect } = useDisconnect();
 
   useEffect(() => {
     setMounted(true);
@@ -27,6 +29,9 @@ export default function Home() {
       </main>
     );
   }
+
+  const shortAddress =
+    address?.slice(0, 6) + "..." + address?.slice(-4);
 
   return (
     <main
@@ -62,10 +67,31 @@ export default function Home() {
         </div>
 
         {/* Right Side */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4">
+
+          {!isConnected && <ConnectWallet />}
+
           {isConnected && (
-            <div className="text-xs px-3 py-1 rounded-full bg-green-500/20 text-green-600 dark:text-green-400 border border-green-500/30">
-              Connected
+            <div className="flex items-center gap-3">
+              <div className="text-xs px-3 py-1 rounded-full bg-green-500/20 text-green-600 dark:text-green-400 border border-green-500/30">
+                {shortAddress}
+              </div>
+
+              <button
+                onClick={() => disconnect()}
+                className="
+                  flex items-center gap-1
+                  text-xs px-3 py-1 rounded-full
+                  bg-red-500/20 text-red-600
+                  dark:text-red-400
+                  border border-red-500/30
+                  hover:bg-red-500/30
+                  transition
+                "
+              >
+                <LogOut className="h-3 w-3" />
+                Disconnect
+              </button>
             </div>
           )}
 
