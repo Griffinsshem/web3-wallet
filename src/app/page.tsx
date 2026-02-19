@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ConnectWallet } from "@/components/connect-wallet";
 import DashboardSection from "@/components/DashboardSection";
-import { useAccount, useDisconnect } from "wagmi";
+import { useAccount, useDisconnect, useConnect } from "wagmi";
+import { injected } from "wagmi/connectors";
 import { ThemeToggle } from "@/components/theme-toggle";
 import {
   Wallet,
@@ -15,8 +15,10 @@ import {
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
+
   const { isConnected, address } = useAccount();
   const { disconnect } = useDisconnect();
+  const { connect } = useConnect();
 
   useEffect(() => {
     setMounted(true);
@@ -31,7 +33,7 @@ export default function Home() {
   }
 
   const shortAddress =
-    address?.slice(0, 6) + "..." + address?.slice(-4);
+    address && `${address.slice(0, 6)}...${address.slice(-4)}`;
 
   return (
     <main
@@ -68,10 +70,20 @@ export default function Home() {
 
         {/* Right Side */}
         <div className="flex items-center gap-4">
-
-          {!isConnected && <ConnectWallet />}
-
-          {isConnected && (
+          {!isConnected ? (
+            <button
+              onClick={() => connect({ connector: injected() })}
+              className="
+                px-4 py-2 text-sm font-medium rounded-xl
+                bg-black text-white
+                dark:bg-white dark:text-black
+                hover:opacity-90 transition
+                shadow-md
+              "
+            >
+              Connect Wallet
+            </button>
+          ) : (
             <div className="flex items-center gap-3">
               <div className="text-xs px-3 py-1 rounded-full bg-green-500/20 text-green-600 dark:text-green-400 border border-green-500/30">
                 {shortAddress}
@@ -106,9 +118,7 @@ export default function Home() {
 
       {/* ================= CONTENT ================= */}
       <div className="relative flex flex-1 items-center justify-center px-6 py-20">
-
-        {/* DISCONNECTED STATE */}
-        {!isConnected && (
+        {!isConnected ? (
           <div
             className="
             w-full max-w-md
@@ -137,7 +147,18 @@ export default function Home() {
             </div>
 
             <div className="mt-8 flex justify-center">
-              <ConnectWallet />
+              <button
+                onClick={() => connect({ connector: injected() })}
+                className="
+                  px-6 py-3 text-sm font-medium rounded-xl
+                  bg-black text-white
+                  dark:bg-white dark:text-black
+                  hover:opacity-90 transition
+                  shadow-md
+                "
+              >
+                Connect Wallet
+              </button>
             </div>
 
             <div className="mt-8 flex items-center justify-center gap-6 text-xs text-[#6b6b6b] dark:text-gray-500">
@@ -152,10 +173,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-        )}
-
-        {/* CONNECTED DASHBOARD */}
-        {isConnected && (
+        ) : (
           <div className="w-full flex justify-center">
             <DashboardSection />
           </div>
