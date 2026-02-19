@@ -49,15 +49,6 @@ export default function DashboardPage() {
             </p>
           </div>
 
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-sm font-medium 
-              text-[#1f1f1f] dark:text-white 
-              hover:opacity-70 transition"
-          >
-            <FiHome className="text-base" />
-            Back Home
-          </Link>
 
         </div>
 
