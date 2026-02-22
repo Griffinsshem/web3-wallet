@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
+import { CryptoTicker } from "./crypto-ticker";
 import {
   Wallet,
   LogOut,
@@ -147,6 +148,7 @@ export function ConnectWallet() {
           <p>• Secure Web3 authentication</p>
           <p>• Optimized RPC performance</p>
         </div>
+        <CryptoTicker />
       </div>
     </div>
   );
