@@ -104,7 +104,7 @@ export function ConnectWallet() {
           Connect Your Wallet
         </h2>
 
-        <p className="relative mt-2 text-sm text-gray-400">
+        <p className="relative mt-2 text-sm text-gray-900">
           Securely access your Web3 dashboard and view on-chain balances.
         </p>
 
@@ -143,7 +143,7 @@ export function ConnectWallet() {
         </div>
 
         {/* Feature Teaser */}
-        <div className="relative mt-8 space-y-2 text-xs text-gray-500">
+        <div className="relative mt-8 space-y-2 text-xs text-gray-900">
           <p>• Real-time wallet balance tracking</p>
           <p>• Secure Web3 authentication</p>
           <p>• Optimized RPC performance</p>
