@@ -1,58 +1,64 @@
 "use client";
 
-import { useAccount } from "wagmi";
+import { useAccount, useBalance } from "wagmi";
+import { formatUnits } from "viem";
+import { Loader2 } from "lucide-react";
 
-const SUPPORTED_CHAIN_ID = 1;
+export default function BalanceCard() {
+  const { address, isConnected } = useAccount();
 
-export default function NetworkCard() {
-  const { chain, isConnected } = useAccount();
-  const isSupported = chain?.id === SUPPORTED_CHAIN_ID;
+  const { data: balance, isLoading } = useBalance({
+    address,
+    query: { enabled: !!address },
+  });
+
+  if (!isConnected) {
+    return (
+      <div className="text-gray-500 dark:text-gray-400 text-sm">
+        Connect wallet to view balance
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+        <Loader2 className="h-4 w-4 animate-spin" />
+        Loading balance...
+      </div>
+    );
+  }
+
+  if (!balance) {
+    return (
+      <div className="text-sm text-gray-500 dark:text-gray-400">
+        No balance data available
+      </div>
+    );
+  }
+
+  const formatted = formatUnits(balance.value, balance.decimals);
 
   return (
     <div className="space-y-6">
 
-      <h2 className="text-lg font-semibold text-[#1a1a1a] dark:text-white">
-        Network
-      </h2>
+      <p className="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400">
+        Available Balance
+      </p>
 
-      {isConnected && chain ? (
-        <div className="space-y-4 text-sm">
+      <div className="flex items-end gap-3">
+        <span className="text-4xl sm:text-5xl font-bold tracking-tight text-[#1a1a1a] dark:text-white">
+          {Number(formatted).toFixed(4)}
+        </span>
+        <span className="text-lg text-gray-500 dark:text-gray-400 mb-1">
+          {balance.symbol}
+        </span>
+      </div>
 
-          <div className="flex justify-between">
-            <span className="text-gray-500 dark:text-gray-400">
-              Network
-            </span>
-            <span className="font-medium text-[#1a1a1a] dark:text-white">
-              {chain.name}
-            </span>
-          </div>
+      <div className="text-xs text-gray-400 font-mono break-all">
+        Raw (Wei): {balance.value.toString()}
+      </div>
 
-          <div className="flex justify-between">
-            <span className="text-gray-500 dark:text-gray-400">
-              Chain ID
-            </span>
-            <span className="font-medium text-[#1a1a1a] dark:text-white">
-              {chain.id}
-            </span>
-          </div>
-
-          <div
-            className={`
-              inline-flex px-3 py-1 rounded-full text-xs font-medium
-              ${isSupported
-                ? "bg-green-100 text-green-700 dark:bg-green-500/10 dark:text-green-400"
-                : "bg-red-100 text-red-600 dark:bg-red-500/10 dark:text-red-400"}
-            `}
-          >
-            {isSupported ? "Supported Network" : "Unsupported Network"}
-          </div>
-
-        </div>
-      ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
-          Connect wallet to view network
-        </p>
-      )}
     </div>
   );
 }
