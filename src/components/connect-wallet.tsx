@@ -2,14 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
-import { CryptoTicker } from "./crypto-ticker";
 import {
   Wallet,
   LogOut,
   CheckCircle2,
   Loader2,
   Copy,
-  ExternalLink,
+  ShieldCheck,
+  Zap,
+  BarChart3,
 } from "lucide-react";
 
 export function ConnectWallet() {
@@ -33,21 +34,23 @@ export function ConnectWallet() {
     setTimeout(() => setIsCopying(false), 1000);
   };
 
+  /* ============================
+     CONNECTED STATE
+  ============================ */
+
   if (isConnected) {
     return (
-      <div className="relative w-full max-w-md">
-        <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl p-8 text-center space-y-6">
+      <div className="w-full max-w-md">
+        <div className="rounded-2xl border border-white/10 bg-white/60 dark:bg-[#121212]/80 backdrop-blur-xl shadow-2xl p-8 text-center space-y-6">
 
-          {/* Connected Badge */}
-          <div className="flex items-center justify-center gap-2 text-sm text-green-400">
+          <div className="flex items-center justify-center gap-2 text-sm text-green-500">
             <CheckCircle2 className="h-4 w-4" />
             <span className="tracking-wide font-medium">
               Wallet Connected
             </span>
           </div>
 
-          {/* Address */}
-          <div className="flex items-center justify-center gap-3 text-gray-300">
+          <div className="flex items-center justify-center gap-3 text-gray-700 dark:text-gray-300">
             <span className="font-mono text-sm tracking-wider">
               {address?.slice(0, 6)}...{address?.slice(-4)}
             </span>
@@ -55,22 +58,18 @@ export function ConnectWallet() {
             <button
               onClick={copyAddress}
               className="hover:scale-110 active:scale-95 transition-transform"
-              title="Copy address"
             >
               <Copy className="h-4 w-4 opacity-70 hover:opacity-100" />
             </button>
-
-            <ExternalLink className="h-4 w-4 opacity-50" />
           </div>
 
-          {/* Disconnect */}
           <button
             onClick={() => disconnect()}
             className="
               w-full
               flex items-center justify-center gap-2
               rounded-xl
-              bg-red-500/90
+              bg-red-500
               hover:bg-red-600
               px-6 py-3
               text-sm font-medium text-white
@@ -85,11 +84,15 @@ export function ConnectWallet() {
     );
   }
 
-  return (
-    <div className="relative w-full max-w-md">
-      <div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl p-10 text-center overflow-hidden">
+  /* ============================
+     DISCONNECTED STATE
+  ============================ */
 
-        {/* Subtle Glow Background */}
+  return (
+    <div className="w-full max-w-md">
+      <div className="relative rounded-2xl border border-white/10 bg-white/70 dark:bg-[#121212]/80 backdrop-blur-xl shadow-2xl p-10 overflow-hidden">
+
+        {/* Soft Glow */}
         <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-72 h-72 bg-blue-500/20 blur-3xl rounded-full pointer-events-none" />
 
         {/* Icon */}
@@ -100,12 +103,12 @@ export function ConnectWallet() {
         </div>
 
         {/* Heading */}
-        <h2 className="relative text-2xl font-semibold tracking-tight text-white">
+        <h2 className="relative text-3xl font-semibold tracking-tight text-gray-900 dark:text-white text-center">
           Connect Your Wallet
         </h2>
 
-        <p className="relative mt-2 text-sm text-gray-900">
-          Securely access your Web3 dashboard and view on-chain balances.
+        <p className="relative mt-3 text-sm text-gray-600 dark:text-gray-400 text-center">
+          Securely access your Web3 dashboard and monitor on-chain assets.
         </p>
 
         {/* Connect Button */}
@@ -142,13 +145,28 @@ export function ConnectWallet() {
           </button>
         </div>
 
-        {/* Feature Teaser */}
-        <div className="relative mt-8 space-y-2 text-xs text-gray-900">
-          <p>• Real-time wallet balance tracking</p>
-          <p>• Secure Web3 authentication</p>
-          <p>• Optimized RPC performance</p>
+        {/* Divider */}
+        <div className="mt-10 border-t border-gray-200 dark:border-white/10" />
+
+        {/* Premium Features */}
+        <div className="mt-6 space-y-4 text-sm text-gray-700 dark:text-gray-300">
+
+          <div className="flex items-start gap-3">
+            <ShieldCheck className="h-4 w-4 text-green-500 mt-1" />
+            <span>Non-custodial authentication — you control your keys.</span>
+          </div>
+
+          <div className="flex items-start gap-3">
+            <BarChart3 className="h-4 w-4 text-blue-500 mt-1" />
+            <span>Real-time portfolio balance tracking.</span>
+          </div>
+
+          <div className="flex items-start gap-3">
+            <Zap className="h-4 w-4 text-yellow-500 mt-1" />
+            <span>Optimized RPC calls for fast blockchain reads.</span>
+          </div>
+
         </div>
-        <CryptoTicker />
       </div>
     </div>
   );
