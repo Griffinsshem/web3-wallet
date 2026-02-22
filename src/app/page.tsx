@@ -5,7 +5,8 @@ import { ConnectWallet } from "@/components/connect-wallet";
 import DashboardSection from "@/components/DashboardSection";
 import { useAccount } from "wagmi";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Wallet, Loader2 } from "lucide-react";
+import { Loader2, TrendingUp } from "lucide-react";
+import { CryptoTicker } from "@/components/crypto-ticker";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -29,78 +30,64 @@ export default function Home() {
   return (
     <main
       className="
-        relative flex min-h-screen flex-col
+        relative min-h-screen
         bg-gradient-to-br
         from-[#e8e4dc] via-[#e2ddd4] to-[#dcd6cc]
         dark:from-[#0f0f0f] dark:via-[#111111] dark:to-[#1a1a1a]
         transition-colors duration-500
       "
     >
-      {/* Center Content Properly */}
-      <div className="flex flex-1 flex-col items-center justify-center px-6 py-12">
+      {/* Decorative Glow Background */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -top-32 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-blue-500/20 blur-3xl dark:bg-blue-500/10" />
+      </div>
 
-        {/* Landing Card */}
-        <div
-          className="
-            w-full max-w-md
-            rounded-3xl
-            bg-white/60 dark:bg-[#1c1c1c]/80
-            p-12
-            shadow-[0_20px_60px_rgba(0,0,0,0.15)]
-            backdrop-blur-xl
-            border border-white/40 dark:border-[#2a2a2a]
-            transition-colors duration-500
-          "
-        >
-          {/* Header */}
-          <div className="flex flex-col items-center text-center">
-            <div
-              className="
-                mb-6 flex h-14 w-14 items-center justify-center rounded-2xl
-                bg-[#1f1f1f] text-white
-                dark:bg-white dark:text-black
-                transition-colors duration-500
-              "
-            >
-              <Wallet className="h-7 w-7" />
-            </div>
+      {/* Main Layout */}
+      <div className="relative mx-auto w-full max-w-6xl px-6 py-20">
 
-            <h1
-              className="
-                text-3xl font-semibold tracking-wide
-                text-[#1f1f1f] dark:text-white
-                transition-colors duration-500
-              "
-            >
-              CryptoDash
-            </h1>
+        {/* Responsive Grid */}
+        <div className="grid items-center gap-16 lg:grid-cols-2">
 
-            <p
-              className="
-                mt-3 text-sm tracking-wide
-                text-[#5c5c5c] dark:text-gray-400
-                transition-colors duration-500
-              "
-            >
-              Connect your wallet to securely view balances
-            </p>
-          </div>
-
-          {/* Connect Button */}
-          <div className="mt-10 flex justify-center">
+          {/* Left Column — Wallet */}
+          <div className="flex justify-center lg:justify-start">
             <ConnectWallet />
           </div>
+
+          {/* Right Column — Market Preview (Only When Disconnected) */}
+          {!isConnected && (
+            <div className="space-y-6">
+
+              <div>
+                <div className="flex items-center gap-2 text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                  <TrendingUp className="h-4 w-4" />
+                  Live Market Overview
+                </div>
+
+                <h2 className="mt-3 text-3xl font-semibold text-[#1f1f1f] dark:text-white">
+                  Track Popular Crypto Assets
+                </h2>
+
+                <p className="mt-2 text-sm text-[#5c5c5c] dark:text-gray-400">
+                  Real-time token prices updating automatically every few seconds.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-white/40 dark:border-white/10 bg-white/60 dark:bg-[#1c1c1c]/70 p-6 backdrop-blur-xl shadow-xl">
+                <CryptoTicker />
+              </div>
+
+            </div>
+          )}
         </div>
       </div>
 
       {/* Dashboard Section — Only When Connected */}
       {isConnected && (
-        <div className="w-full px-6 pb-16">
+        <div className="mx-auto w-full max-w-6xl px-6 pb-20">
           <DashboardSection />
         </div>
       )}
 
-      {/* Theme Toggle */}
       <ThemeToggle />
     </main>
   );
