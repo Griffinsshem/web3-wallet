@@ -96,10 +96,10 @@ export function CryptoTicker() {
             {/* Header */}
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-sm text-gray-500 dark:text-gray-900">
+                <div className="text-sm text-gray-500 dark:text-gray-400">
                   {token.name}
                 </div>
-                <div className="text-xs text-gray-800">
+                <div className="text-xs text-gray-400">
                   {token.symbol}
                 </div>
               </div>
@@ -107,8 +107,8 @@ export function CryptoTicker() {
               {!loading && (
                 <div
                   className={`text-xs font-medium ${isPositive
-                    ? "text-green-500"
-                    : "text-red-500"
+                      ? "text-green-500"
+                      : "text-red-500"
                     }`}
                 >
                   {isPositive ? "+" : ""}
