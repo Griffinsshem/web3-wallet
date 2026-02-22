@@ -3,7 +3,7 @@
 import AccountCard from "@/components/AccountCard";
 import NetworkCard from "@/components/NetworkCard";
 import BalanceCard from "@/components/BalanceCard";
-import { FiGrid } from "react-icons/fi";
+import { FiGrid, FiArrowUpRight, FiArrowDownLeft, FiExternalLink } from "react-icons/fi";
 
 export default function DashboardPage() {
   return (
@@ -60,6 +60,63 @@ export default function DashboardPage() {
               transition-all
             ">
               <BalanceCard />
+
+              {/* Divider */}
+              <div className="border-t border-gray-200 dark:border-white/10 my-8" />
+
+              {/* Quick Actions */}
+              <div className="flex flex-wrap gap-4">
+                <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-black text-white dark:bg-white dark:text-black text-sm font-medium transition hover:opacity-80">
+                  <FiArrowUpRight />
+                  Send
+                </button>
+
+                <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-100 dark:bg-white/5 text-sm font-medium transition hover:bg-gray-200 dark:hover:bg-white/10">
+                  <FiArrowDownLeft />
+                  Receive
+                </button>
+
+                <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-100 dark:bg-white/5 text-sm font-medium transition hover:bg-gray-200 dark:hover:bg-white/10">
+                  <FiExternalLink />
+                  Explorer
+                </button>
+              </div>
+            </div>
+
+            {/* Portfolio & Activity Card */}
+            <div className="
+              rounded-3xl
+              bg-white
+              dark:bg-[#15161a]
+              border border-gray-200 dark:border-white/5
+              shadow-sm dark:shadow-lg
+              p-8
+              transition
+            ">
+              <h2 className="text-lg font-semibold text-[#1a1a1a] dark:text-white mb-6">
+                Recent Activity
+              </h2>
+
+              <div className="space-y-4">
+
+                {/* Empty State */}
+                <div className="flex items-center justify-between p-4 rounded-2xl bg-gray-50 dark:bg-white/5">
+                  <div>
+                    <p className="text-sm font-medium text-[#1a1a1a] dark:text-white">
+                      No recent transactions
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      Your recent transfers and interactions will appear here.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Subtle info box */}
+                <div className="text-xs text-gray-400">
+                  Activity updates automatically when transactions occur.
+                </div>
+
+              </div>
             </div>
 
           </div>
