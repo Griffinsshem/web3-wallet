@@ -54,8 +54,8 @@ export default function AccountCard() {
         >
           <span
             className={`h-2 w-2 rounded-full ${isConnected
-                ? "bg-green-500 animate-pulse"
-                : "bg-red-500"
+              ? "bg-green-500 animate-pulse"
+              : "bg-red-500"
               }`}
           />
           {isConnected ? "Connected" : "Disconnected"}
