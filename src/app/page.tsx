@@ -37,6 +37,30 @@ export default function Home() {
         transition-colors duration-500
       "
     >
+      {/* 🔹 Navbar */}
+      <header className="sticky top-0 z-50 w-full border-b border-black/5 dark:border-white/10 backdrop-blur-xl bg-white/60 dark:bg-black/40">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+
+          {/* Logo */}
+          <div className="flex items-center gap-2">
+            <div className="h-8 w-8 rounded-lg bg-black dark:bg-white flex items-center justify-center">
+              <span className="text-white dark:text-black text-sm font-bold">
+                C
+              </span>
+            </div>
+            <span className="text-lg font-semibold tracking-tight text-[#1f1f1f] dark:text-white">
+              CryptoDash
+            </span>
+          </div>
+
+          {/* Right Side */}
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+          </div>
+
+        </div>
+      </header>
+
       {/* Decorative Glow Background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -top-32 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-blue-500/20 blur-3xl dark:bg-blue-500/10" />
@@ -87,8 +111,6 @@ export default function Home() {
           <DashboardSection />
         </div>
       )}
-
-      <ThemeToggle />
     </main>
   );
 }
