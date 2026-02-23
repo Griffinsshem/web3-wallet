@@ -82,6 +82,7 @@ src/
 │ ├── connect-wallet.tsx
 │ ├── theme-provider.tsx
 │ └── theme-toggle.tsx
+│ └── crypto-ticker.tsx
 │
 ├── providers/
 │ └── web3-provider.tsx
